@@ -46,3 +46,42 @@ Users can also check the contents under the data directory using
 ```python
 dm.list_dir()
 ```
+
+### DecisionTree, PlotTree, RandomForest
++ Description
+
+These commands give users tools for data mining by using tree relevant methods.
+
++ Example
+
+As above, the following commands import the data which is to be analyse.
+```python
+from xuerui_stat import *
+dm = DataManager(enable=False)
+data=dm.import_data("/home/xuerui/Documents/PythonProjects/test.csv")
+```
+
+The decision tree method can be applied to the data by specifying the name of category.
+```python
+dt=DecisionTree(data,'Cat')
+dt.train()
+t=dt.tree
+print(t)
+
+pt=PlotTree(dt)
+pt.tree_structure_plot()
+
+dt.test()
+pt.confusion_matrix_plot()
+```
+
+The tree and confusion matrix can be plotted via the 'PlotTree' module.
+
+Furthermore, the random forest can also be used as follows:
+```python
+rf=RandomForest(data,'Cat')
+rf.train(num_tree=300,max_depth=0,min_gini=0)
+print(rf.oob_error)
+dt.test()
+print(dt.confusion_matrix)
+```
